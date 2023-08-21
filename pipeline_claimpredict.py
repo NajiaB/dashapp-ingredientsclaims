@@ -112,7 +112,7 @@ new_list2 = "AQUA, ETHYLHEXYL METHOXYCINNAMATE, BUTYLENE GLYCOL, GLYCERIN, SD AL
 #new_list = 'ZINC OXIDE, AQUA, GLYCERIN'
 #new_list2 = ['AQUA', 'GLYCERIN']
 #new_list2 = ['ZINC OXIDE']
-new_list2 = ', '.join(new_list2)
+#new_list2 = ', '.join(new_list2)
 
 
 list2= [new_list]
