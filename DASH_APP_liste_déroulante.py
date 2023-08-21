@@ -22,9 +22,6 @@ import dash_table
 
 app = dash.Dash(__name__)
 
-subprocess.run(["python", chemin])
-vectorizer = load_vectorizer(chemin + 'binary_models')  # Replace with your actual method
-
 ingredient_options = [{'label': ingredient, 'value': ingredient} for ingredient in ingredients]
 
 app.layout = html.Div([
@@ -106,7 +103,6 @@ def update_plot(n_clicks, selected_ingredients):
             }
         }
     else:
-        # Provide an empty figure if no ingredients are selected
         figure = {}
         
 
@@ -123,19 +119,17 @@ def update_importance_table(selected_claim, selected_ingredients):
     if not selected_ingredients:
         return html.Div("Please select ingredients.")
     
-    # Transform the selected ingredients using the vectorizer
     test_term_doc = vectorizer.transform(selected_ingredients)
     
-    # Call your get_local_weights_df function with the appropriate parameters
     df_words_weights = get_local_weights_df(vectorizer, test_term_doc, classifiers, selected_claim)
     
     # Create a Dash DataTable from the DataFrame
     table = dash_table.DataTable(
         columns=[{"name": col, "id": col} for col in df_words_weights.columns],
         data=df_words_weights.to_dict("records"),
-        style_table={"overflowX": "auto"},  # Enable horizontal scrolling
-        sort_action="native",  # Enable sorting
-        sort_mode="multi",  # Enable multi-column sorting
+        style_table={"overflowX": "auto"},  
+        sort_action="native", 
+        sort_mode="multi",  
     )
     
     return table
